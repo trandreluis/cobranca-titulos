@@ -28,6 +28,11 @@ public class TituloController {
 		return mav;
 	}
 	
+	@RequestMapping
+	public String pesquisar() {
+		return "PesquisaTitulos";
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(Titulo titulo) {
 		titulos.save(titulo);
