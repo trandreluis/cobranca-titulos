@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 
 <head>
-<meta charset="UTF-8"></meta>
 <title>Pesquisa de títulos</title>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"></link>
-<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 </head>
 
-<body>
-
-	<nav class="navbar navbar-inverse navbar-static-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand"> <img alt="Hyperactive JR"
-					src="/images/logo_hyperactivejr.png"></img>
-				</a>
-			</div>
-		</div>
-	</nav>
+<section layout:fragment="conteudo">
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h1 class="panel-title">Pesquisa de títulos</h1>
+			<div class="clearfix">
+				<h1 class="panel-title titulo-right">Pesquisa de títulos</h1>
+				<a class="btn btn-link link-right" href="/titulos/novo">Novo
+					título</a>
+			</div>
 		</div>
 		<div class="panel-body">
 			<table class="table table-bordered table-striped">
@@ -51,7 +43,6 @@
 		</div>
 	</div>
 
-	<script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
-</body>
+</section>
+
 </html>

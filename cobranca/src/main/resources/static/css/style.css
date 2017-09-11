@@ -11,3 +11,13 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
+.link-right{
+	float: right;
+	padding: 0px;
+}
+
+.titulo-right {
+	float: left;
+	padding-top: 2px;
+}

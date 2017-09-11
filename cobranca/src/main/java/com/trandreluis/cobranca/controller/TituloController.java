@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,18 +20,17 @@ public class TituloController {
 
 	@Autowired
 	private Titulos titulos;
-	
+
 	@RequestMapping("/novo")
-	public ModelAndView novo() {
-		ModelAndView mav = new ModelAndView("CadastroTitulo");
-		return mav;
+	public String novo() {
+		return "CadastroTitulo";
 	}
-	
+
 	@RequestMapping
 	public String pesquisar() {
 		return "PesquisaTitulos";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView salvar(Titulo titulo) {
 		titulos.save(titulo);
@@ -45,5 +43,5 @@ public class TituloController {
 	public List<StatusTitulo> todosStatusTitulo() {
 		return Arrays.asList(StatusTitulo.values());
 	}
-	
+
 }
