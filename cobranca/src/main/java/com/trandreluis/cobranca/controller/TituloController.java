@@ -27,8 +27,12 @@ public class TituloController {
 	}
 
 	@RequestMapping
-	public String pesquisar() {
-		return "PesquisaTitulos";
+	public ModelAndView pesquisar() {
+		List<Titulo> todosTitulos = titulos.findAll();
+		ModelAndView mav = new ModelAndView("PesquisaTitulos");
+		mav.addObject("todosTitulos", todosTitulos);
+	
+		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
