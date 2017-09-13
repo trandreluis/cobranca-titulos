@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,8 +24,10 @@ public class TituloController {
 	private Titulos titulos;
 
 	@RequestMapping("/novo")
-	public String novo() {
-		return "CadastroTitulo";
+	public ModelAndView novo() {
+		ModelAndView mav = new ModelAndView("CadastroTitulo");
+		mav.addObject(new Titulo());
+		return mav;
 	}
 
 	@RequestMapping
@@ -36,9 +40,12 @@ public class TituloController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(Titulo titulo) {
-		titulos.save(titulo);
+	public ModelAndView salvar(@Validated Titulo titulo, Errors errors) {
 		ModelAndView mav = new ModelAndView("CadastroTitulo");
+		if(errors.hasErrors()) {
+			return mav;
+		}
+		titulos.save(titulo);
 		mav.addObject("mensagem", "Título salvo com sucesso!");
 		return mav;
 	}
