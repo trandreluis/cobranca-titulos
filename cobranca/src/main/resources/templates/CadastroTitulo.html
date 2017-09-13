@@ -28,7 +28,7 @@
 					<label for="descricao" class="col-sm-2 control-label">Descrição</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="descricao"
-							name="descricao"></input>
+							th:field="*{descricao}"></input>
 					</div>
 				</div>
 				<div class="form-group" th:classappend="${#fields.hasErrors('dataVencimento')} ? 'has-error'">
@@ -36,19 +36,19 @@
 						de vencimento</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="dataVencimento"
-							name="dataVencimento"></input>
+							th:field="*{dataVencimento}"></input>
 					</div>
 				</div>
 				<div class="form-group" th:classappend="${#fields.hasErrors('valor')} ? 'has-error'">
 					<label for="valor" class="col-sm-2 control-label">Valor</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="valor" name="valor"></input>
+						<input type="text" class="form-control" id="valor" th:field="*{valor}"></input>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-2">
-						<select class="form-control" id="status" name="status">
+						<select class="form-control" id="status" th:field="*{status}">
 							<option th:each="status : ${todosStatusTitulo}"
 								th:value="${status}" th:text="${status.descricao}"></option>
 						</select>
