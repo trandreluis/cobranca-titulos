@@ -6,7 +6,7 @@
 
 <div class="modal fade" id="confirmacaoExclusaoModal" tabindex="-1">
 	<div class="modal-dialog">
-		<form action="/titulos" method="POST">
+		<form th:attr="data-url-base='/titulos'" method="POST">
 			<input type="hidden" name="_method" value="DELETE"></input>
 			<div class="modal-content">
 				<div class="modal-header">
