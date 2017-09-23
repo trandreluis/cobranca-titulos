@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -17,16 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.trandreluis.cobranca.enums.StatusTitulo;
 import com.trandreluis.cobranca.model.Titulo;
-import com.trandreluis.cobranca.repository.Titulos;
+import com.trandreluis.cobranca.service.CadastroTituloService;
 
 @Controller
 @RequestMapping("/titulos")
 public class TituloController {
 
 	private static final String CADASTRO_VIEW = "CadastroTitulo";
-	
+
 	@Autowired
-	private Titulos titulos;
+	private CadastroTituloService titulosService;
 
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
@@ -37,41 +36,41 @@ public class TituloController {
 
 	@RequestMapping
 	public ModelAndView pesquisar() {
-		List<Titulo> todosTitulos = titulos.findAll();
+		List<Titulo> todosTitulos = titulosService.buscarTodos();
 		ModelAndView mav = new ModelAndView("PesquisaTitulos");
 		mav.addObject("todosTitulos", todosTitulos);
-	
+
 		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
-		if(errors.hasErrors()) {
+		if (errors.hasErrors()) {
 			return CADASTRO_VIEW;
 		}
-		
-		try {			
-			titulos.save(titulo);
+
+		try {
+			titulosService.salvar(titulo);
 			attributes.addFlashAttribute("mensagem", "Título salvo com sucesso!");
-		}catch(DataIntegrityViolationException error) {
-			errors.rejectValue("dataVencimento", null, "Formato de data inválido.");
+			return "redirect:/titulos/novo";
+		} catch (IllegalArgumentException error) {
+			errors.rejectValue("dataVencimento", null, error.getMessage());
 			return CADASTRO_VIEW;
 		}
-		return "redirect:/titulos/novo";
-		
 	}
-	
+
 	@RequestMapping("{id}")
 	public ModelAndView editar(@PathVariable("id") Titulo titulo) {
 		ModelAndView mav = new ModelAndView(CADASTRO_VIEW);
 		mav.addObject(titulo);
 		return mav;
 	}
-	
-	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
-		titulos.delete(id);
+		titulosService.excluir(id);
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		System.out.println("EXCLUIR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		return "redirect:/titulos";
 	}
 
