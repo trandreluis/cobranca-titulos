@@ -24,5 +24,5 @@ $('#confirmacaoExclusaoModal').on(
 
 $(function() {
 	$('[rel="tooltip"]').tooltip();
-	$('.js-currency').maskMoney({decimal: ',', thousands: '.' allowZero: true});
+	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowZero: true});
 });
