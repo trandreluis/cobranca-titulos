@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,10 +71,14 @@ public class TituloController {
 	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
 		titulosService.excluir(id);
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
-		System.out.println("EXCLUIR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		return "redirect:/titulos";
 	}
 
+	@RequestMapping(value = "/{id}/receber", method = RequestMethod.PUT)
+	public @ResponseBody String receber(@PathVariable Long id) {
+		return titulosService.receber(id);
+	}
+	
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> todosStatusTitulo() {
 		return Arrays.asList(StatusTitulo.values());
