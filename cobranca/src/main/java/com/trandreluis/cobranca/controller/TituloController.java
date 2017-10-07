@@ -38,8 +38,7 @@ public class TituloController {
 
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
-		String descricao = filtro.getDescricao() == null ? "" : filtro.getDescricao();
-		List<Titulo> todosTitulos = titulosService.buscarTodos(descricao);
+		List<Titulo> todosTitulos = titulosService.buscarTodos(filtro.getDescricao());
 		ModelAndView mav = new ModelAndView("PesquisaTitulos");
 		mav.addObject("todosTitulos", todosTitulos);
 
