@@ -35,8 +35,9 @@ public class CadastroTituloService {
 		titulos.delete(id);
 	}
 
-	public List<Titulo> buscarTodos() {
-		return titulos.findAll();
+	public List<Titulo> buscarTodos(String descricao) {
+		descricao = descricao == null ? "" : descricao;
+		return titulos.findByDescricaoContaining(descricao);
 	}
 	
 }

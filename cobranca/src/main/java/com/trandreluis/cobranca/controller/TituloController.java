@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.trandreluis.cobranca.enums.StatusTitulo;
 import com.trandreluis.cobranca.model.Titulo;
+import com.trandreluis.cobranca.repository.TituloFilter;
 import com.trandreluis.cobranca.service.CadastroTituloService;
 
 @Controller
@@ -36,8 +37,9 @@ public class TituloController {
 	}
 
 	@RequestMapping
-	public ModelAndView pesquisar() {
-		List<Titulo> todosTitulos = titulosService.buscarTodos();
+	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
+		String descricao = filtro.getDescricao() == null ? "" : filtro.getDescricao();
+		List<Titulo> todosTitulos = titulosService.buscarTodos(descricao);
 		ModelAndView mav = new ModelAndView("PesquisaTitulos");
 		mav.addObject("todosTitulos", todosTitulos);
 
