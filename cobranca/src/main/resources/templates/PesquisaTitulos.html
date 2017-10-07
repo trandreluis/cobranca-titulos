@@ -23,13 +23,14 @@
 
 
 		<div class="panel-body">
-			<form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object="${filtro}">
+			<form method="GET" class="form-horizontal" th:action="@{/titulos}"
+				th:object="${filtro}">
 				<div class="form-group">
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input class="form-control" autofocus="autofocus" name="descricao"
-								th:field="*{descricao}" placeholder="Qual título você está procurando?" />
-							<span
+							<input class="form-control" autofocus="autofocus"
+								name="descricao" th:field="*{descricao}"
+								placeholder="Qual título você está procurando?" /> <span
 								class="input-group-btn">
 								<button type="submit" class="btn btn-default">
 									<i class="glyphicon glyphicon-search"></i>
@@ -40,54 +41,56 @@
 				</div>
 			</form>
 
-			<table class="table table-bordered table-striped">
-				<thead>
+			<div class="table-responsive">
 
-					<tr>
-						<th class="text-center col-md-1">#</th>
-						<th>Descrição</th>
-						<th class="text-center col-md-2">Data de vencimento</th>
-						<th class="text-right col-md-2">Valor</th>
-						<th class="text-center col-md-2">Status</th>
-						<th class="col-md-1"></th>
-					</tr>
+				<table class="table table-bordered table-striped">
+					<thead>
 
-				</thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th>Descrição</th>
+							<th class="text-center col-md-2">Data de vencimento</th>
+							<th class="text-right col-md-2">Valor</th>
+							<th class="text-center col-md-2">Status</th>
+							<th class="col-md-1"></th>
+						</tr>
 
-				<tbody>
-					<tr th:each="titulo : ${todosTitulos}">
-						<td class="text-center" th:text="${titulo.id}"></td>
-						<td th:text="${titulo.descricao}"></td>
-						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
-						<td class="text-right" th:text="|R$ ${{titulo.valor}}|"></td>
-						<td class="text-center" th:attr="data-role=${titulo.id}"><span
-							class="label" th:text="${titulo.status.descricao}"
-							th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
-						</td>
-						<td class="text-center"><a class="btn btn-link btn-xs"
-							th:href="@{/titulos/{id}(id=${titulo.id})}" title="Editar"
-							rel="tooltip" data-placement="top"> <span
-								class="glyphicon glyphicon-pencil"></span>
-						</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-							data-target="#confirmacaoExclusaoModal"
-							th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}"
-							title="Excluir" rel="tooltip" data-placement="top"> <span
-								class="glyphicon glyphicon-remove"></span>
-						</a> <a class="btn btn-link btn-xs js-atualizar-status"
-							title="Receber" rel="tooltip" data-placement="top"
-							th:if="${titulo.pendente}" th:attr="data-id=${titulo.id}"
-							th:href="@{/titulos/{id}/receber(id=${titulo.id})}"> <span
-								class="glyphicon glyphicon-check"></span>
-						</a></td>
-					</tr>
+					</thead>
 
-					<tr>
-						<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum
-							título foi encontrado.</td>
-					</tr>
-				</tbody>
+					<tbody>
+						<tr th:each="titulo : ${todosTitulos}">
+							<td class="text-center" th:text="${titulo.id}"></td>
+							<td th:text="${titulo.descricao}"></td>
+							<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
+							<td class="text-right" th:text="|R$ ${{titulo.valor}}|"></td>
+							<td class="text-center" th:attr="data-role=${titulo.id}"><span
+								class="label" th:text="${titulo.status.descricao}"
+								th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
+							</td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/titulos/{id}(id=${titulo.id})}" title="Editar"
+								rel="tooltip" data-placement="top"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-id=${titulo.id}, data-descricao=${titulo.descricao}"
+								title="Excluir" rel="tooltip" data-placement="top"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a> <a class="btn btn-link btn-xs js-atualizar-status"
+								title="Receber" rel="tooltip" data-placement="top"
+								th:if="${titulo.pendente}" th:attr="data-id=${titulo.id}"
+								th:href="@{/titulos/{id}/receber(id=${titulo.id})}"> <span
+									class="glyphicon glyphicon-check"></span>
+							</a></td>
+						</tr>
 
-			</table>
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(todosTitulos)}">Nenhum
+								título foi encontrado.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
