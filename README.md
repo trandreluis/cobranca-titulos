@@ -12,7 +12,7 @@ Ajax
 Thymeleaf  
 jQuery  
 JavaScript  
-Booststrap  
+Bootstrap  
 HTML e CSS
 
 # O que é um título?
