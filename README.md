@@ -6,11 +6,13 @@ Sua utilidade foi servir de projeto prático para o aprendizado inicial do frame
 Spring MVC  
 Spring Boot  
 Spring Data JPA  
+Tomcat  
 MySql  
 Ajax  
 Thymeleaf  
 jQuery  
 JavaScript  
+Booststrap  
 HTML e CSS
 
 # O que é um título?
